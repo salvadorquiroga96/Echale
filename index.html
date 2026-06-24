@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Échale Ganas — Chicago Culture & Community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0D0D0D;
+    --paper: #F7F4EE;
+    --accent: #E63B2E;
+    --gold: #C8972A;
+    --mid: #3D3D3D;
+    --muted: #888;
+    --border: rgba(0,0,0,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(247,244,238,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--paper); }
+
+  .nav-cta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    background: var(--accent);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: #c42e22; }
+
+  /* ── HERO ── */
+  .hero {
+    margin-top: 60px;
+    min-height: 92vh;
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 5rem 3rem 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--paper);
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(247,244,238,0.55);
+    max-width: 380px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(247,244,238,0.3);
+    padding-bottom: 0.25rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .hero-read:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    filter: grayscale(20%);
+  }
+
+  .hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--ink) 0%, transparent 40%),
+                linear-gradient(to top, var(--ink) 0%, transparent 30%);
+  }
+
+  .hero-ticker {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--accent);
+    padding: 0.6rem 0;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 4rem;
+    animation: ticker 28s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .ticker-dot {
+    color: rgba(255,255,255,0.5);
+    margin-right: 4rem;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── FEATURED STRIP ── */
+  .featured-strip {
+    background: var(--ink);
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(247,244,238,0.08);
+  }
+
+  .strip-item {
+    padding: 2rem 0;
+    border-right: 1px solid rgba(247,244,238,0.08);
+    padding-right: 2rem;
+    padding-left: 0;
+    text-decoration: none;
+  }
+
+  .strip-item:first-child { padding-left: 0; }
+  .strip-item:last-child { border-right: none; padding-left: 2rem; }
+  .strip-item:nth-child(2) { padding-left: 2rem; }
+
+  .strip-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .strip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .strip-item:hover .strip-title { color: var(--gold); }
+
+  /* ── SECTION WRAPPER ── */
+  .section { padding: 5rem 4rem; }
+  .section-dark { background: var(--ink); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-dark .section-rule { background: rgba(247,244,238,0.1); }
+  .section-dark .section-label { color: rgba(247,244,238,0.3); }
+
+  .see-all {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .see-all::after { content: '→'; }
+  .see-all:hover { color: #c42e22; }
+
+  /* ── ARTICLE GRID ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+  }
+
+  .article-main { cursor: pointer; }
+
+  .article-main-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+    display: block;
+    filter: grayscale(15%);
+    transition: filter 0.3s;
+  }
+
+  .article-main:hover .article-main-img { filter: grayscale(0%); }
+
+  .article-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .article-title-lg {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    transition: color 0.2s;
+  }
+
+  .article-main:hover .article-title-lg { color: var(--accent); }
+
+  .article-excerpt {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .article-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  .article-list { display: flex; flex-direction: column; gap: 0; }
+
+  .article-list-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+
+  .article-list-item:first-child { border-top: 1px solid var(--border); }
+
+  .article-list-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .article-list-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+    transition: color 0.2s;
+  }
+
+  .article-list-item:hover .article-list-title { color: var(--accent); }
+
+  .article-list-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DARK GRID (Culture) ── */
+  .dark-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .dark-card {
+    text-decoration: none;
+    display: block;
+  }
+
+  .dark-card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    filter: grayscale(30%) brightness(0.8);
+    transition: filter 0.3s;
+  }
+
+  .dark-card:hover .dark-card-img { filter: grayscale(0%) brightness(1); }
+
+  .dark-card-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .dark-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .dark-card:hover .dark-card-title { color: var(--gold); }
+
+  .dark-card-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(247,244,238,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── OPINION RAIL ── */
+  .opinion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .opinion-item {
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    margin: -1px 0 0 -1px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+
+  .opinion-item:hover { background: rgba(230,59,46,0.04); }
+
+  .opinion-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(200,151,42,0.2);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .opinion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s;
+  }
+
+  .opinion-item:hover .opinion-title { color: var(--accent); }
+
+  .opinion-author {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: var(--accent);
+    padding: 5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .newsletter-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .newsletter-form input {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 1rem 1.25rem;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
+  .newsletter-form input:focus { border-color: white; }
+
+  .newsletter-form button {
+    background: white;
+    color: var(--accent);
+    border: none;
+    padding: 1rem 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+
+  .newsletter-form button:hover { background: var(--paper); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 2px solid var(--accent);
+  }
+
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--paper);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-brand-name span { color: var(--accent); }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(247,244,238,0.4);
+    line-height: 1.6;
+    max-width: 260px;
+  }
+
+  .footer-col-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(247,244,238,0.3);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    color: rgba(247,244,238,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--paper); }
+
+  .footer-bottom {
+    background: var(--ink);
+    padding: 1.5rem 4rem;
+    border-top: 1px solid rgba(247,244,238,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(247,244,238,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PLACEHOLDER IMAGES ── */
+  .img-placeholder {
+    width: 100%;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.1);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  .img-placeholder.ratio-16-9 { aspect-ratio: 16/9; }
+  .img-placeholder.ratio-4-3 { aspect-ratio: 4/3; }
+  .img-placeholder.ratio-hero { height: 100%; min-height: 600px; }
+  .img-placeholder.light { background: #e8e4dc; color: rgba(0,0,0,0.2); }
+
+  /* Color accents per category */
+  .cat-cultura { background: rgba(200,151,42,0.15); }
+  .cat-barrio { background: rgba(230,59,46,0.15); }
+  .cat-arte { background: rgba(100,180,100,0.1); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .featured-strip, .dark-grid, .opinion-grid, footer { grid-template-columns: 1fr; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .newsletter { grid-template-columns: 1fr; }
+    .section { padding: 3rem 1.5rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero-left { padding: 3rem 1.5rem; }
+    footer { padding: 3rem 1.5rem; }
+    .footer-bottom { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+    .newsletter { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Échale<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Barrio</a></li>
+    <li><a href="#">Cultura</a></li>
+    <li><a href="#">Arte</a></li>
+    <li><a href="#">Gente</a></li>
+    <li><a href="#">Opinión</a></li>
+  </ul>
+  <a href="#newsletter" class="nav-cta">Subscribe</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Featured Story</div>
+    <h1 class="hero-headline">
+      Chicago's<br>Streets Are<br><em>Talking.</em><br>We Listen.
+    </h1>
+    <p class="hero-sub">Independent local journalism for and by the communities that make this city worth fighting for.</p>
+    <a href="article.html" class="hero-read">Read our latest &#x2192;</a>
+  </div>
+  <div class="hero-right">
+    <div class="img-placeholder ratio-hero">HERO IMAGE</div>
+    <div class="hero-img-overlay"></div>
+  </div>
+  <div class="hero-ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">Pilsen Mural Festival Returns <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Little Village Business Spotlight <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Chicago Banda Scene Explodes <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">El Barrio Votes: What's at Stake <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Bridgeport's New Wave of Chefs <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Pilsen Mural Festival Returns <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Little Village Business Spotlight <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Chicago Banda Scene Explodes <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">El Barrio Votes: What's at Stake <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Bridgeport's New Wave of Chefs <span class="ticker-dot">◆</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED STRIP -->
+<div class="featured-strip">
+  <a href="article.html" class="strip-item">
+    <div class="strip-cat">Barrio</div>
+    <div class="strip-title">How 26th Street Became the Second Most Visited Commercial Strip in Illinois</div>
+  </a>
+  <a href="article.html" class="strip-item">
+    <div class="strip-cat">Cultura</div>
+    <div class="strip-title">The Quinceañera Photographer Documenting Chicago's Hidden History</div>
+  </a>
+  <a href="article.html" class="strip-item">
+    <div class="strip-cat">Arte</div>
+    <div class="strip-title">Murals as Memory: Pilsen Artists Push Back Against Gentrification</div>
+  </a>
+</div>
+
+<!-- LATEST STORIES -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-label">Latest Stories</span>
+    <div class="section-rule"></div>
+    <a href="#" class="see-all">See all</a>
+  </div>
+  <div class="articles-grid">
+    <div class="article-main">
+      <a href="article.html">
+        <div class="img-placeholder ratio-16-9 light">FEATURED IMAGE</div>
+      </a>
+      <div style="margin-top:1.25rem">
+        <div class="article-cat">Community</div>
+        <a href="article.html" style="text-decoration:none">
+          <h2 class="article-title-lg">Inside the Fight to Keep Bronzeville's Last Independent Record Store Alive</h2>
+        </a>
+        <p class="article-excerpt">For 30 years, Dusty Groove has been more than a record store — it's been a gathering place, a community archive, and a refuge for Chicago's music lovers. Now rising rents threaten everything.</p>
+        <div class="article-meta">By Marcus Rivera &nbsp;·&nbsp; June 18, 2026 &nbsp;·&nbsp; 8 min read</div>
+      </div>
+    </div>
+    <div class="article-list">
+      <a href="article.html" class="article-list-item">
+        <div class="article-list-cat">Gente</div>
+        <div class="article-list-title">Meet the Abuela Running the Most Popular Food Instagram in Chicago</div>
+        <div class="article-list-meta">June 17, 2026 &nbsp;·&nbsp; 5 min</div>
+      </a>
+      <a href="article.html" class="article-list-item">
+        <div class="article-list-cat">Barrio</div>
+        <div class="article-list-title">Logan Square Is Changing Fast — These Longtime Residents Are Documenting It</div>
+        <div class="article-list-meta">June 16, 2026 &nbsp;·&nbsp; 6 min</div>
+      </a>
+      <a href="article.html" class="article-list-item">
+        <div class="article-list-cat">Arte</div>
+        <div class="article-list-title">Chicago's Underground Banda Scene Is Having Its Biggest Year Yet</div>
+        <div class="article-list-meta">June 15, 2026 &nbsp;·&nbsp; 4 min</div>
+      </a>
+      <a href="article.html" class="article-list-item">
+        <div class="article-list-cat">Cultura</div>
+        <div class="article-list-title">The New Generation of Chicago Chefs Cooking Their Grandmothers' Recipes</div>
+        <div class="article-list-meta">June 14, 2026 &nbsp;·&nbsp; 7 min</div>
+      </a>
+      <a href="article.html" class="article-list-item">
+        <div class="article-list-cat">Opinión</div>
+        <div class="article-list-title">We Don't Need More Art Districts. We Need to Protect the Artists Already Here.</div>
+        <div class="article-list-meta">June 13, 2026 &nbsp;·&nbsp; 5 min</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURA SECTION -->
+<section class="section section-dark">
+  <div class="section-header">
+    <span class="section-label">Cultura</span>
+    <div class="section-rule"></div>
+    <a href="#" class="see-all" style="color:var(--gold)">See all</a>
+  </div>
+  <div class="dark-grid">
+    <a href="article.html" class="dark-card">
+      <div class="img-placeholder ratio-4-3">IMAGE</div>
+      <div class="dark-card-cat">Music</div>
+      <div class="dark-card-title">How Cumbia Found a Second Home on Chicago's North Side</div>
+      <div class="dark-card-meta">June 12, 2026 &nbsp;·&nbsp; 6 min read</div>
+    </a>
+    <a href="article.html" class="dark-card">
+      <div class="img-placeholder ratio-4-3">IMAGE</div>
+      <div class="dark-card-cat">Food</div>
+      <div class="dark-card-title">The Birria Boom and What It Actually Means for Mexican Food in America</div>
+      <div class="dark-card-meta">June 10, 2026 &nbsp;·&nbsp; 5 min read</div>
+    </a>
+    <a href="article.html" class="dark-card">
+      <div class="img-placeholder ratio-4-3">IMAGE</div>
+      <div class="dark-card-cat">Style</div>
+      <div class="dark-card-title">Chanclas, Guayaberas, and the Chicago Designers Reclaiming Latinx Fashion</div>
+      <div class="dark-card-meta">June 8, 2026 &nbsp;·&nbsp; 4 min read</div>
+    </a>
+  </div>
+</section>
+
+<!-- OPINION -->
+<section class="section" style="padding-bottom: 0;">
+  <div class="section-header">
+    <span class="section-label">Opinión</span>
+    <div class="section-rule"></div>
+    <a href="#" class="see-all">See all</a>
+  </div>
+</section>
+<div class="opinion-grid">
+  <a href="article.html" class="opinion-item">
+    <div class="opinion-number">01</div>
+    <div class="opinion-title">The City Keeps Building Bike Lanes in Our Neighborhood. Nobody Asked Us.</div>
+    <div class="opinion-author">By Elena Castillo &nbsp;·&nbsp; June 17, 2026</div>
+  </a>
+  <a href="article.html" class="opinion-item">
+    <div class="opinion-number">02</div>
+    <div class="opinion-title">Stop Calling It "Authentic" — Let Our Food Speak for Itself</div>
+    <div class="opinion-author">By Javier Morales &nbsp;·&nbsp; June 15, 2026</div>
+  </a>
+  <a href="article.html" class="opinion-item">
+    <div class="opinion-number">03</div>
+    <div class="opinion-title">My Kids Don't Speak Spanish. That's My Fault and I'm Making It Right.</div>
+    <div class="opinion-author">By Sandra Reyes &nbsp;·&nbsp; June 12, 2026</div>
+  </a>
+  <a href="article.html" class="opinion-item">
+    <div class="opinion-number">04</div>
+    <div class="opinion-title">Gentrification Has a New Name in Chicago. It's Called "Investment."</div>
+    <div class="opinion-author">By Miguel Torres &nbsp;·&nbsp; June 10, 2026</div>
+  </a>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div>
+    <div class="newsletter-label">Stay in the loop</div>
+    <h2 class="newsletter-headline">Stories that matter, delivered to you.</h2>
+  </div>
+  <div class="newsletter-form">
+    <input type="text" placeholder="Your name">
+    <input type="email" placeholder="Your email address">
+    <button type="button">Subscribe — It's Free</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand-name">Échale<span>.</span></div>
+    <p class="footer-tagline">Independent local journalism covering Chicago's Latino communities — their culture, their stories, their fight.</p>
+  </div>
+  <div>
+    <div class="footer-col-label">Sections</div>
+    <ul class="footer-links">
+      <li><a href="#">Barrio</a></li>
+      <li><a href="#">Cultura</a></li>
+      <li><a href="#">Arte</a></li>
+      <li><a href="#">Gente</a></li>
+      <li><a href="#">Opinión</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-label">About</div>
+    <ul class="footer-links">
+      <li><a href="#">Our Mission</a></li>
+      <li><a href="#">The Team</a></li>
+      <li><a href="#">Write for Us</a></li>
+      <li><a href="#">Advertise</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-label">Follow</div>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Twitter / X</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">TikTok</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 Échale Ganas Media. All rights reserved.</span>
+  <span class="footer-copy">Made in Chicago 🇲🇽</span>
+</div>
+
+</body>
+</html>

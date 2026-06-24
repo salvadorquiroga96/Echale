@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inside the Fight to Keep Bronzeville's Last Record Store Alive — Échale Ganas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0D0D0D;
+    --paper: #F7F4EE;
+    --accent: #E63B2E;
+    --gold: #C8972A;
+    --mid: #3D3D3D;
+    --muted: #888;
+    --border: rgba(0,0,0,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(247,244,238,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--paper); }
+
+  .nav-cta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    background: var(--accent);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: #c42e22; }
+
+  /* ── ARTICLE HEADER ── */
+  .article-header {
+    margin-top: 60px;
+    background: var(--ink);
+    padding: 5rem 0 0;
+  }
+
+  .article-header-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(247,244,238,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover { color: var(--paper); }
+
+  .breadcrumb-sep {
+    font-size: 0.6rem;
+    color: rgba(247,244,238,0.2);
+  }
+
+  .breadcrumb-current {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .article-cat-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    background: var(--accent);
+    padding: 0.3rem 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .article-deck {
+    font-size: 1.1rem;
+    color: rgba(247,244,238,0.55);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .article-byline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(247,244,238,0.1);
+  }
+
+  .byline-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .byline-info { flex: 1; }
+
+  .byline-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--paper);
+    margin-bottom: 0.2rem;
+  }
+
+  .byline-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(247,244,238,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  .share-row {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .share-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(247,244,238,0.4);
+    border: 1px solid rgba(247,244,238,0.15);
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    background: none;
+    transition: all 0.2s;
+  }
+
+  .share-btn:hover { color: var(--paper); border-color: rgba(247,244,238,0.4); }
+
+  /* ── HERO IMAGE ── */
+  .article-hero-img {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .img-placeholder {
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.1);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  .img-placeholder.full-width { width: 100%; aspect-ratio: 21/9; }
+  .img-placeholder.light { background: #e8e4dc; color: rgba(0,0,0,0.15); }
+  .img-placeholder.inline { aspect-ratio: 16/9; width: 100%; }
+
+  .img-caption {
+    max-width: 780px;
+    margin: 0.75rem auto 0;
+    padding: 0 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(247,244,238,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body-wrap {
+    background: var(--paper);
+    padding: 4rem 0 6rem;
+  }
+
+  .article-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .article-body { font-size: 1.05rem; line-height: 1.85; color: var(--mid); }
+
+  .article-body p { margin-bottom: 1.75rem; }
+
+  .article-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 2.5rem 0 1rem;
+    line-height: 1.2;
+  }
+
+  .article-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    margin: 2.5rem 0;
+    padding: 0.5rem 0 0.5rem 2rem;
+  }
+
+  .pullquote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .pullquote cite {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  .article-body .inline-img { margin: 2rem 0; }
+  .article-body .inline-caption {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { position: sticky; top: 80px; }
+
+  .sidebar-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-section:last-child { border-bottom: none; }
+
+  .sidebar-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-article {
+    text-decoration: none;
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .sidebar-article:last-child { margin-bottom: 0; }
+
+  .sidebar-img {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    background: #e8e4dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.4rem;
+    color: rgba(0,0,0,0.2);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .sidebar-article:hover .sidebar-title { color: var(--accent); }
+
+  .sidebar-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mid);
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.65rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .tag:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 99;
+    transition: width 0.1s linear;
+  }
+
+  /* ── MORE STORIES ── */
+  .more-stories {
+    background: var(--ink);
+    padding: 4rem;
+  }
+
+  .more-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .more-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(247,244,238,0.3);
+    white-space: nowrap;
+  }
+
+  .more-rule {
+    flex: 1;
+    height: 1px;
+    background: rgba(247,244,238,0.1);
+  }
+
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .more-card { text-decoration: none; display: block; }
+
+  .more-card-img {
+    background: #1e1e1e;
+    aspect-ratio: 16/9;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    color: rgba(255,255,255,0.1);
+    letter-spacing: 0.1em;
+  }
+
+  .more-card-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .more-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .more-card:hover .more-card-title { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 1px solid rgba(247,244,238,0.08);
+  }
+
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--paper);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-brand-name span { color: var(--accent); }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(247,244,238,0.4);
+    line-height: 1.6;
+    max-width: 260px;
+  }
+
+  .footer-col-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(247,244,238,0.3);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    color: rgba(247,244,238,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--paper); }
+
+  .footer-bottom {
+    background: var(--ink);
+    padding: 1.5rem 4rem;
+    border-top: 1px solid rgba(247,244,238,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(247,244,238,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 900px) {
+    .article-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .sidebar { position: static; }
+    .more-grid, footer { grid-template-columns: 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .more-stories { padding: 3rem 1.5rem; }
+    footer { padding: 3rem 1.5rem; }
+    .footer-bottom { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+    .article-header-inner { padding: 0 1.5rem; }
+    .img-caption { padding: 0 1.5rem; }
+    .article-body-wrap { padding: 3rem 0 4rem; }
+    .article-layout { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Échale<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Barrio</a></li>
+    <li><a href="#">Cultura</a></li>
+    <li><a href="#">Arte</a></li>
+    <li><a href="#">Gente</a></li>
+    <li><a href="#">Opinión</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Subscribe</a>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+  <div class="article-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="#">Community</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">Article</span>
+    </div>
+    <div class="article-cat-badge">Community</div>
+    <h1 class="article-headline">Inside the Fight to Keep Bronzeville's Last Independent Record Store Alive</h1>
+    <p class="article-deck">For 30 years, Dusty Groove has been more than a record store — it's been a gathering place, a community archive, and a refuge for Chicago's music lovers. Now rising rents threaten everything.</p>
+    <div class="article-byline">
+      <div class="byline-avatar">MR</div>
+      <div class="byline-info">
+        <div class="byline-name">Marcus Rivera</div>
+        <div class="byline-meta">June 18, 2026 &nbsp;·&nbsp; 8 min read &nbsp;·&nbsp; Community</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn">Share</button>
+        <button class="share-btn">Copy Link</button>
+      </div>
+    </div>
+  </div>
+  <div class="img-placeholder full-width">HERO IMAGE — 21:9</div>
+  <div class="img-caption">Inside Dusty Groove Records on a Friday afternoon. Photo by Camila Ortega.</div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body-wrap">
+  <div class="article-layout">
+    <article class="article-body">
+
+      <p>The smell hits you first — vinyl, dust, decades. Walk into Dusty Groove Records on a weekday afternoon and you'll find three or four people flipping through crates with the quiet focus of archivists. Nobody is in a rush. Nobody is on their phone. The music playing from the back room is always something you've never heard before but immediately need to know.</p>
+
+      <p>Owner Ray Delgado started the store in 1994 with a folding table, 200 records, and a handwritten sign. "People said I was crazy," he says, laughing from behind the counter where he's spent more hours than he can count. "A record store in this neighborhood? In '94? But I knew what I had."</p>
+
+      <div class="pullquote">
+        <p>"This isn't just a record store. It's where people come when they need to remember who they are."</p>
+        <cite>— Ray Delgado, owner, Dusty Groove Records</cite>
+      </div>
+
+      <p>What Ray had was an instinct for community. Over three decades, Dusty Groove became something rare — a genuinely local institution. Weekend listening parties. DJ workshops for teenagers who couldn't afford equipment. A wall of local artists whose records he carried before anyone else would. The store has outlasted three economic cycles, two recessions, the rise of streaming, and a global pandemic.</p>
+
+      <h2>The Rent Notice That Changed Everything</h2>
+
+      <p>In February, Ray received a letter from his landlord. After 18 years in the same location, his rent would increase by 60% at the next renewal. The new number — $6,800 a month — is more than double what many comparable independent retailers are paying in similar neighborhoods outside the city's most gentrified corridors.</p>
+
+      <p>"I sat with that letter for three days," Ray says. "I didn't tell anyone at first. Not my wife, not my staff. I just sat with it."</p>
+
+      <div class="inline-img">
+        <div class="img-placeholder inline light">INLINE IMAGE</div>
+        <div class="inline-caption">Ray Delgado in the back room, where he does most of his buying and sorting. Photo by Camila Ortega.</div>
+      </div>
+
+      <p>The neighborhood around the store has changed dramatically over the past decade. What was once a stretch of barbershops, bodegas, and laundromats is now dotted with coffee shops, a boutique fitness studio, and a "curated vintage" shop that opened last spring. Long-time residents call it by the name that has become familiar in neighborhood newsletters and city council meetings: displacement.</p>
+
+      <h2>A Community Responds</h2>
+
+      <p>When Ray finally told his regulars about the rent hike, something unexpected happened. Within 48 hours, a mutual aid group had formed. A GoFundMe was live. Three local alderpersons had called. Chicago radio stations picked up the story. The hashtag #SaveDustyGroove was trending locally by the end of the week.</p>
+
+      <p>"I was overwhelmed," Ray admits. "I've always thought of the store as a place I run for the community. I didn't realize the community thought of it the same way."</p>
+
+      <p>The response speaks to something deeper than nostalgia for a record store. In a city that has seen hundreds of neighborhood anchors close over the past decade — barbershops, community theaters, family-owned restaurants — Dusty Groove has become a symbol. Its survival, many believe, says something about what kind of city Chicago intends to be.</p>
+
+      <h2>What Comes Next</h2>
+
+      <p>Ray is currently in negotiation with his landlord and working with the Chicago Independent Business Alliance to explore options including a long-term lease, a potential ownership stake in the building, and a community benefit agreement that would tie any sale of the property to protections for existing tenants.</p>
+
+      <p>"I'm not giving up," he says. "I've been here 30 years. I know how to fight." He pauses, then smiles. "And I've got pretty good records to put on while I do it."</p>
+
+      <p style="color: var(--muted); font-style: italic; font-size: 0.9rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">If you'd like to support Dusty Groove, visit their GoFundMe or stop by the store at 4731 S. Cottage Grove Ave., Chicago.</p>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">More in Community</div>
+        <a href="index.html" class="sidebar-article">
+          <div class="sidebar-img">IMG</div>
+          <div>
+            <div class="sidebar-title">Logan Square Residents Map the Neighborhood They're Losing</div>
+            <div class="sidebar-meta">June 16, 2026</div>
+          </div>
+        </a>
+        <a href="index.html" class="sidebar-article">
+          <div class="sidebar-img">IMG</div>
+          <div>
+            <div class="sidebar-title">The Abuela Running Chicago's Most Followed Food Instagram</div>
+            <div class="sidebar-meta">June 17, 2026</div>
+          </div>
+        </a>
+        <a href="index.html" class="sidebar-article">
+          <div class="sidebar-img">IMG</div>
+          <div>
+            <div class="sidebar-title">How 26th Street Became the Second Most Visited Strip in Illinois</div>
+            <div class="sidebar-meta">June 12, 2026</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Tags</div>
+        <div class="tag-cloud">
+          <a href="#" class="tag">Bronzeville</a>
+          <a href="#" class="tag">Music</a>
+          <a href="#" class="tag">Gentrification</a>
+          <a href="#" class="tag">Small Business</a>
+          <a href="#" class="tag">Culture</a>
+          <a href="#" class="tag">Barrio</a>
+        </div>
+      </div>
+
+      <div class="sidebar-section" style="background: var(--ink); padding: 1.5rem;">
+        <div class="sidebar-label" style="color: rgba(247,244,238,0.3);">Newsletter</div>
+        <p style="font-size:0.85rem; color: rgba(247,244,238,0.5); margin-bottom: 1rem; line-height: 1.6;">Stories like this, every week. Free.</p>
+        <input type="email" placeholder="Your email" style="width:100%; background: rgba(247,244,238,0.08); border: 1px solid rgba(247,244,238,0.15); padding: 0.65rem 0.75rem; color: white; font-family: Inter, sans-serif; font-size: 0.85rem; margin-bottom: 0.5rem; outline: none;">
+        <button style="width:100%; background: var(--accent); color: white; border: none; padding: 0.65rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;">Subscribe</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- MORE STORIES -->
+<div class="more-stories">
+  <div class="more-header">
+    <span class="more-label">More stories</span>
+    <div class="more-rule"></div>
+    <a href="index.html" style="font-family:'Space Mono',monospace; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); text-decoration:none;">All stories →</a>
+  </div>
+  <div class="more-grid">
+    <a href="article.html" class="more-card">
+      <div class="more-card-img">IMAGE</div>
+      <div class="more-card-cat">Cultura</div>
+      <div class="more-card-title">How Cumbia Found a Second Home on Chicago's North Side</div>
+    </a>
+    <a href="article.html" class="more-card">
+      <div class="more-card-img">IMAGE</div>
+      <div class="more-card-cat">Arte</div>
+      <div class="more-card-title">Murals as Memory: Pilsen Artists Push Back Against Gentrification</div>
+    </a>
+    <a href="article.html" class="more-card">
+      <div class="more-card-img">IMAGE</div>
+      <div class="more-card-cat">Opinión</div>
+      <div class="more-card-title">We Don't Need More Art Districts. We Need to Protect the Artists Already Here.</div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand-name">Échale<span>.</span></div>
+    <p class="footer-tagline">Independent local journalism covering Chicago's Latino communities — their culture, their stories, their fight.</p>
+  </div>
+  <div>
+    <div class="footer-col-label">Sections</div>
+    <ul class="footer-links">
+      <li><a href="#">Barrio</a></li>
+      <li><a href="#">Cultura</a></li>
+      <li><a href="#">Arte</a></li>
+      <li><a href="#">Gente</a></li>
+      <li><a href="#">Opinión</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-label">About</div>
+    <ul class="footer-links">
+      <li><a href="#">Our Mission</a></li>
+      <li><a href="#">The Team</a></li>
+      <li><a href="#">Write for Us</a></li>
+      <li><a href="#">Advertise</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-label">Follow</div>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Twitter / X</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">TikTok</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 Échale Ganas Media. All rights reserved.</span>
+  <span class="footer-copy">Made in Chicago 🇲🇽</span>
+</div>
+
+<script>
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / total) * 100;
+    bar.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>
