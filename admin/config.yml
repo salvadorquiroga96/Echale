@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: salvadorquiroga96/Echale
   branch: main
 
 media_folder: "images/uploads"
